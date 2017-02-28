@@ -1,6 +1,8 @@
 **Vehicle Detection Project**
 ---
 
+The code for this project is included in the IPython notebook, which can be found in the same subfolder as this README.
+
 [//]: # (Image References)
 [image1]: ./examples/car_not_car.png
 [hog_hls_0]: ./output_images/hog_features/hls_0.png 
@@ -28,8 +30,6 @@
 [video1]: ./project_video_processed.mp4
 
 ####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
-
-The code for this step is contained in the first code cell of the IPython notebook (or in lines # through # of the file called `some_file.py`).  
 
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 

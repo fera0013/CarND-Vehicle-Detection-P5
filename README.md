@@ -1,18 +1,5 @@
-##Writeup Template
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
-
----
-
 **Vehicle Detection Project**
-
-The goals / steps of this project are the following:
-
-* Perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a classifier Linear SVM classifier
-* Optionally, you can also apply a color transform and append binned color features, as well as histograms of color, to your HOG feature vector. 
-* Note: for those first two steps don't forget to normalize your features and randomize a selection for training and testing.
-* Implement a sliding-window technique and use your trained classifier to search for vehicles in images.
-* Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
-* Estimate a bounding box for vehicles detected.
+---
 
 [//]: # (Image References)
 [image1]: ./examples/car_not_car.png
@@ -31,7 +18,7 @@ The goals / steps of this project are the following:
 [final4]: ./output_images/final/test4.png
 [final5]: ./output_images/final/test5.png
 [final6]: ./output_images/final/test6.png
-[grid]: ./output_images/detection_grid/grid.png
+[grid]: ./output_images/detection_grid/test1.png
 [heat1]: ./output_images/heat_maps/test1.png
 [heat2]: ./output_images/heat_maps/test2.png
 [heat3]: ./output_images/heat_maps/test3.png
@@ -39,14 +26,6 @@ The goals / steps of this project are the following:
 [heat5]: ./output_images/heat_maps/test5.png
 [heat6]: ./output_images/heat_maps/test6.png
 [video1]: ./project_video_processed.mp4
-
-## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
-###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
-
----
-###Writeup / README
-
-###Histogram of Oriented Gradients (HOG)
 
 ####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
@@ -94,10 +73,15 @@ For sliding window search, I used a simple grid consisting of quadratic windows 
 Ultimately I searched on the grid described above using HLS channel 0 HOG features plus spatially binned color and histograms of color in the feature vector, which provided the best results on the test images. The following pictures show the detected positives on the test images:
 
 ![alt text][positives1]
+
 ![alt text][positives2]
+
 ![alt text][positives3]
+
 ![alt text][positives4]
+
 ![alt text][positives5]
+
 ![alt text][positives6]
 
 ### Video Implementation
@@ -113,19 +97,29 @@ I recorded the positions of positive detections in each frame of the video.  Fro
 ### Here are six frames and their corresponding heatmaps:
 
 ![alt text][heat1]
+
 ![alt text][heat2]
+
 ![alt text][heat3]
+
 ![alt text][heat4]
+
 ![alt text][heat5]
+
 ![alt text][heat6]
 
 ### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
+
 ![alt text][final1]
+
 ![alt text][final2]
+
 ![alt text][final3]
+
 ![alt text][final4]
+
 ![alt text][final5]
+
 ![alt text][final6]
 
 
@@ -133,4 +127,4 @@ I recorded the positions of positive detections in each frame of the video.  Fro
 
 ####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-A general problem in this project is the large set of hyperparameters, that makes it impossible to find the best combination using a systematic grid search approach. The only possible approach is therefore to find a promising setup by trial and error and refine it further by finetuning additional parameters. The approach I chose for this project yielded good results on the test images and is able to detect the cars most of the times in the video. The detection boxes are however extremely unstable and there are a lot of false positives. The former problem could be tackled by an algorithm that averages boxes over several frames. A solution for the false positives could be the introduction of continuity tracking, which ignores boxes that are not confirmed by similar ones in subsequent frames. Since most false positives occur at the bottom of the frames, they could also be filtered out by reducing the sliding window grid further. 
+A general problem in this project is the large set of hyperparameters, that makes it impossible to find the best combination using a systematic grid search approach. The only possible approach is therefore to find a promising setup by trial and error and refine it further by finetuning additional parameters. The approach I chose for this project yielded good results on the test images and is able to detect the cars most of the times in the video. The detection boxes are however extremely unstable and there are a lot of false positives. The former problem could be tackled by an algorithm that averages boxes over several frames. A solution for the false positives could be some sort of continuity tracking, which ignores boxes that are not confirmed by similar ones in subsequent frames. Since most false positives occur at the bottom of the frames, they could also be filtered out by reducing the sliding window grid further. 

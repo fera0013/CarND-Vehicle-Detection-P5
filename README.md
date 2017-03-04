@@ -52,6 +52,8 @@ combinations:
 
 For the other hog parameters, I used the default values `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`. Finetuning of these parameters is deferred to a future iteration of this project. 
 
+The hog-feature extraction code can be found in the third cell of the .ipynb notebook. 
+
 ####2. Explain how you settled on your final choice of HOG parameters.
 
 The hog parameters were chosen based on the final detection results on the image in the `.\test_images` subfolder, which could be achieved with the hog-features of channel 0 in HLS color space. 
@@ -59,6 +61,8 @@ The hog parameters were chosen based on the final detection results on the image
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
 I trained a linear SVM using hog-features, spatial and color-histogramm features and got an accuracy of 0.97. The implementation of a *sklearn pipeline* which also includes some kind of dimensionality reduction algorithm such as *Principal Component Analysis*, is deferred to a future iteration of this project. 
+
+The classification code is handled by the 5th cell of the .ipynb notebook.
 
 ###Sliding Window Search
 
@@ -68,9 +72,11 @@ For sliding window search, I used a simple grid consisting of quadratic windows 
 
 ![alt text][grid]
 
+The sliding window algorithm is implemented in the 6th cell of the .ipynb notebook.
+
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on the grid described above using HLS channel 0 HOG features plus spatially binned color and histograms of color in the feature vector, which provided the best results on the test images. The following pictures show the detected positives on the test images:
+Ultimately I searched on the grid ilustrated above using HLS channel 2 HOG features plus spatially binned color and histograms of color in the feature vector, which provided the best results on the test images. The following pictures show the detected positives on the test images:
 
 ![alt text][positives1]
 
@@ -92,7 +98,9 @@ Here's a [link to my video result](./project_video_processed.mp4)
 
 ####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected. 
+I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.
+
+The heatmap filter code is implemented in the 8th cell of the .ipynb notebook.
 
 ### Here are six frames and their corresponding heatmaps:
 

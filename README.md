@@ -139,7 +139,7 @@ The heatmap filter code is implemented in the 8th cell of the .ipynb notebook.
 
 A general problem is the large set of hyperparameters, that makes it impossible to find the best combination using a systematic grid search approach. The only possible approach is therefore to find a promising setup by trial and error and refine it further by finetuning selected parameters. The approach I chose for this project yielded good results on the test images and is able to detect the cars most of the times in the video. Using the saturation channel of the HLS color space makes the algorithm robust towards changing light conditions, which are encoded in the L channel.
 An obvious problem is that the detection boxes are a bit unstable and wobbly and there are still false positives. The former problem could be mitigated by averaging boxes over several frames. A solution for the false positives could be some sort of continuity tracking, which ignores boxes that are not confirmed by similar ones in subsequent frames. The implementation of a more sophisticated sliding window approach which scales window sizes with respect to perspective, could further improve the signal/noise ration of the current setup.
-The classifier accuracy could be improved by augmenting the datasets with images extracted from the movie. A feature reduction algorithm such as *Principal Component Analysis* may help to improve generalization and decrease overfitting. The best combination of hyperparameters could be estimated by setting up an *sklearn* - pipeline, as in the following code snippet:
+The classifier accuracy could be improved by augmenting the dataset with images extracted from the movie. A feature reduction algorithm such as *Principal Component Analysis* may help to improve generalization and decrease overfitting. The best combination of classifier hyperparameters could be estimated by setting up an *sklearn* - pipeline, as in the following code snippet:
 
 ```python
 from sklearn.svm import SVC
@@ -174,3 +174,4 @@ estimator.fit(X_train, y_train)
 print estimator.best_params_, estimator.best_score_
 ```
 
+Finally, it should be noted that the implemented pipeline helps to study some basic concepts and ideas, but is much too slow for an application in real world. 
